@@ -48,6 +48,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
         "laravel": {
             "providers": [
                 "Stboris\\FilamentOutbox\\FilamentOutboxServiceProvider"
