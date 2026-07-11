@@ -93,12 +93,16 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 
 ## Immediate next steps (start here)
 
-Phase 3 remainder — items needing Boris:
+Phase 3 remainder — everything scriptable is done (free repo pushed + tagged v1.0.0,
+pro repo committed locally with workbench demo app + docs/LAUNCH.md launch checklist,
+gh CLI installed). Blocked on Boris only:
 
-1. Create private GitHub repo `stboris/filament-outbox-pro` and push the local repo
-2. Record demo video/GIFs (endpoint CRUD, test-send, history retry, triggers)
-3. Lemon Squeezy: create product, license key delivery, decide final price ($49–79)
-4. Publish free package on Packagist (public GitHub repo first)
+1. `gh auth login` — then Claude can create the private `stboris/filament-outbox-pro`
+   repo, push it, and make the free repo public
+2. Submit free package on Packagist: https://packagist.org/packages/submit (+ webhook)
+3. Record demo GIFs — shot list + seeded demo panel in pro repo's docs/LAUNCH.md
+   (`composer serve`, login demo@example.com/password)
+4. Lemon Squeezy store + product — full checklist and product copy in docs/LAUNCH.md
 5. Then Phase 4: landing page → domain → filamentphp.com/plugins listing
 
 ## Decisions already made
