@@ -4,8 +4,9 @@ namespace Stboris\FilamentOutbox\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Stboris\FilamentOutbox\Contracts\Endpoint;
 
-class OutboxEndpoint extends Model
+class OutboxEndpoint extends Model implements Endpoint
 {
     protected $guarded = [];
 
@@ -42,5 +43,25 @@ class OutboxEndpoint extends Model
     public function setting(string $key): mixed
     {
         return data_get($this->settings, $key);
+    }
+
+    public function key(): int|string|null
+    {
+        return $this->getKey();
+    }
+
+    public function channel(): string
+    {
+        return $this->getAttribute('channel');
+    }
+
+    public function url(): string
+    {
+        return $this->getAttribute('url');
+    }
+
+    public function secret(): ?string
+    {
+        return $this->getAttribute('secret');
     }
 }

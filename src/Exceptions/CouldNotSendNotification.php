@@ -34,4 +34,9 @@ class CouldNotSendNotification extends RuntimeException
     {
         return new self("No [{$channel}] endpoint named [{$name}] exists. Check the endpoint name and its channel type in the panel.");
     }
+
+    public static function endpointsUnavailable(string $channel, string $name): self
+    {
+        return new self("The [{$channel}] message references endpoint [{$name}], but named endpoints require the Filament Outbox admin package (no endpoint resolver is installed).");
+    }
 }

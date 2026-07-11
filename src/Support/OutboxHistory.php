@@ -3,19 +3,21 @@
 namespace Stboris\FilamentOutbox\Support;
 
 use Illuminate\Support\Facades\Schema;
+use Stboris\FilamentOutbox\Contracts\HistoryRecorder;
 use Stboris\FilamentOutbox\Enums\MessageStatus;
 use Stboris\FilamentOutbox\Models\OutboxMessage;
 
 /**
  * Persists send attempts to the outbox_messages table. Recording degrades to
  * a no-op when history is disabled or the table has not been migrated, so
- * the channels work without the admin layer installed.
+ * the channels work without the admin layer installed. Bound to the
+ * HistoryRecorder contract, which is how the channels reach it.
  */
-class OutboxHistory
+class OutboxHistory implements HistoryRecorder
 {
     protected static ?bool $tableExists = null;
 
-    public static function record(array $attributes): ?OutboxMessage
+    public function record(array $attributes): ?OutboxMessage
     {
         if (! static::enabled()) {
             return null;

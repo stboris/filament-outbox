@@ -53,7 +53,7 @@ class WebhookChannel
         $headers = array_merge($headers, $message->getHeaders());
 
         $secret = $message->getSecret()
-            ?? $endpoint?->secret
+            ?? $endpoint?->secret()
             ?? config('filament-outbox.webhook.secret');
 
         if ($secret) {

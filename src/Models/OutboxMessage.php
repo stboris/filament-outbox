@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Stboris\FilamentOutbox\Contracts\HistoryRecord;
 use Stboris\FilamentOutbox\Enums\MessageStatus;
 
-class OutboxMessage extends Model
+class OutboxMessage extends Model implements HistoryRecord
 {
     use MassPrunable;
 

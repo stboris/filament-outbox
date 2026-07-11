@@ -7,9 +7,10 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Http;
+use Stboris\FilamentOutbox\Contracts\Endpoint;
+use Stboris\FilamentOutbox\Contracts\EndpointResolver;
+use Stboris\FilamentOutbox\Contracts\HistoryRecorder;
 use Stboris\FilamentOutbox\Exceptions\CouldNotSendNotification;
-use Stboris\FilamentOutbox\Models\OutboxEndpoint;
-use Stboris\FilamentOutbox\Support\OutboxHistory;
 use Throwable;
 
 trait SendsWebhookRequests
@@ -57,7 +58,7 @@ trait SendsWebhookRequests
      * to null so the send is skipped deliberately; a missing or channel-
      * mismatched endpoint name is a bug and throws.
      *
-     * @return array{0: ?string, 1: ?OutboxEndpoint}
+     * @return array{0: ?string, 1: ?Endpoint}
      */
     protected function resolveDestination(
         ?string $messageUrl,
@@ -72,13 +73,17 @@ trait SendsWebhookRequests
         }
 
         if ($endpointName !== null) {
-            $endpoint = OutboxEndpoint::findByName($endpointName);
+            if (! app()->bound(EndpointResolver::class)) {
+                throw CouldNotSendNotification::endpointsUnavailable($channel, $endpointName);
+            }
 
-            if (! $endpoint || $endpoint->channel !== $channel) {
+            $endpoint = app(EndpointResolver::class)->findByName($endpointName);
+
+            if (! $endpoint || $endpoint->channel() !== $channel) {
                 throw CouldNotSendNotification::unknownEndpoint($channel, $endpointName);
             }
 
-            return $endpoint->isActive() ? [$endpoint->url, $endpoint] : [null, null];
+            return $endpoint->isActive() ? [$endpoint->url(), $endpoint] : [null, null];
         }
 
         if (method_exists($notifiable, 'routeNotificationFor')) {
@@ -102,7 +107,7 @@ trait SendsWebhookRequests
         string $url,
         array $payload,
         Notification $notification,
-        ?OutboxEndpoint $endpoint = null,
+        ?Endpoint $endpoint = null,
         array $headers = [],
         string $method = 'post',
         ?string $rawBody = null,
@@ -110,8 +115,10 @@ trait SendsWebhookRequests
         // Anonymous class names embed a NUL byte and the file path — strip it.
         $notificationClass = strstr($notification::class, "\0", true) ?: $notification::class;
 
-        $record = OutboxHistory::record([
-            'outbox_endpoint_id' => $endpoint?->id,
+        $recorder = app()->bound(HistoryRecorder::class) ? app(HistoryRecorder::class) : null;
+
+        $record = $recorder?->record([
+            'outbox_endpoint_id' => $endpoint?->key(),
             'channel' => $channel,
             'url' => $url,
             'method' => $method,
