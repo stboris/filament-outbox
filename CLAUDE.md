@@ -68,7 +68,20 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 2. **Phase 2 (3–4 evenings):** Filament plugin class, endpoint resource, send-history
    widget, test-send action, model-event trigger wiring
 3. **Phase 3 (2–3 evenings):** README + docs site page, demo video/GIFs, Lemon Squeezy
-   product + license key delivery, filamentphp.com/plugins listing submission
+   product + license key delivery
+4. **Phase 4 (2–3 evenings): Product landing page.** Professional marketing site for the
+   plugin — must NOT look AI-generated; benchmark against landing pages of best-selling
+   Filament plugin authors (e.g. Ralph J. Smit's plugin pages at ralphjsmit.com, Kenneth
+   Sese's Advanced Tables, filamentphp.com featured paid plugins — research current best
+   examples at design time). Tech stack: **static HTML + Tailwind CSS** (standalone Tailwind
+   CLI, no Laravel/Filament, no JS framework) — Lemon Squeezy checkout is a hosted
+   link/overlay so no backend is needed, and a static site deploys anywhere (cyon shared
+   hosting or any static host) with zero maintenance. Content: dark-mode hero with real
+   admin-UI screenshot, feature grid, short code snippet (`->endpoint('name')` DX), demo
+   GIF from Phase 3, Free-vs-Pro pricing table with Lemon Squeezy buy button, FAQ,
+   changelog/docs links. Flow: build design → Boris reviews and buys a domain to match →
+   deploy → then submit the filamentphp.com/plugins listing (moved here from Phase 3, since
+   the listing links to this page as the purchase URL).
 
 ## Immediate next steps (start here)
 
