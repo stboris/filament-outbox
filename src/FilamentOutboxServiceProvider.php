@@ -10,11 +10,6 @@ use Stboris\FilamentOutbox\Channels\DiscordChannel;
 use Stboris\FilamentOutbox\Channels\SlackChannel;
 use Stboris\FilamentOutbox\Channels\WebhookChannel;
 use Stboris\FilamentOutbox\Commands\OutboxTestCommand;
-use Stboris\FilamentOutbox\Contracts\EndpointResolver;
-use Stboris\FilamentOutbox\Contracts\HistoryRecorder;
-use Stboris\FilamentOutbox\Support\EloquentEndpointResolver;
-use Stboris\FilamentOutbox\Support\OutboxHistory;
-use Stboris\FilamentOutbox\Triggers\TriggerManager;
 
 class FilamentOutboxServiceProvider extends PackageServiceProvider
 {
@@ -23,28 +18,11 @@ class FilamentOutboxServiceProvider extends PackageServiceProvider
         $package
             ->name('filament-outbox')
             ->hasConfigFile()
-            ->hasMigrations([
-                'create_outbox_endpoints_table',
-                'create_outbox_messages_table',
-            ])
-            ->runsMigrations()
             ->hasCommand(OutboxTestCommand::class);
-    }
-
-    public function packageBooted(): void
-    {
-        TriggerManager::register();
     }
 
     public function packageRegistered(): void
     {
-        // These bindings (and the classes behind them) belong to the admin
-        // package and move to its service provider at split time. The
-        // channels only depend on the contracts and degrade gracefully
-        // (no history, no named endpoints) when nothing is bound.
-        $this->app->singleton(EndpointResolver::class, EloquentEndpointResolver::class);
-        $this->app->singleton(HistoryRecorder::class, OutboxHistory::class);
-
         Notification::resolved(function (ChannelManager $service) {
             $service->extend('discord', fn ($app) => $app->make(DiscordChannel::class));
             $service->extend('webhook', fn ($app) => $app->make(WebhookChannel::class));

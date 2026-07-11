@@ -3,16 +3,13 @@
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Http;
-use Stboris\FilamentOutbox\Contracts\EndpointResolver;
-use Stboris\FilamentOutbox\Contracts\HistoryRecorder;
 use Stboris\FilamentOutbox\Exceptions\CouldNotSendNotification;
 use Stboris\FilamentOutbox\Messages\DiscordMessage;
-use Stboris\FilamentOutbox\Models\OutboxMessage;
 
 /**
- * The channels must keep working when the admin package's container bindings
- * are absent (the standalone free install): sends go out, history recording
- * is skipped, and named endpoints fail with a descriptive exception.
+ * Without the admin package there are no EndpointResolver/HistoryRecorder
+ * bindings: sends still go out, history recording is skipped, and named
+ * endpoints fail with a descriptive exception.
  */
 function standaloneNotification(mixed $message): Notification
 {
@@ -32,12 +29,7 @@ function standaloneNotification(mixed $message): Notification
     };
 }
 
-beforeEach(function () {
-    app()->offsetUnset(EndpointResolver::class);
-    app()->offsetUnset(HistoryRecorder::class);
-});
-
-it('sends without the admin bindings and records no history', function () {
+it('sends without the admin bindings', function () {
     Http::fake(['*' => Http::response(null, 204)]);
 
     (new AnonymousNotifiable)->notifyNow(
@@ -45,7 +37,6 @@ it('sends without the admin bindings and records no history', function () {
     );
 
     Http::assertSent(fn ($request) => $request->url() === 'https://discord.test/hook');
-    expect(OutboxMessage::count())->toBe(0);
 });
 
 it('throws a descriptive exception for named endpoints without a resolver', function () {
