@@ -1,0 +1,61 @@
+{
+    "name": "stboris/filament-outbox",
+    "description": "Configurable notification channels (Discord, Slack, generic webhook) for Laravel, with a Filament v5 admin panel on top.",
+    "keywords": [
+        "laravel",
+        "filament",
+        "notifications",
+        "discord",
+        "slack",
+        "webhook"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boris Stiner",
+            "email": "boris.stiner@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^13.0",
+        "illuminate/http": "^13.0",
+        "illuminate/notifications": "^13.0",
+        "illuminate/support": "^13.0",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "filament/filament": "^5.0",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-livewire": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stboris\\FilamentOutbox\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stboris\\FilamentOutbox\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stboris\\FilamentOutbox\\FilamentOutboxServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
