@@ -53,12 +53,20 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
   and optional queued sending (3 tries, 10/60/300s backoff), FilamentOutboxPlugin with
   OutboxEndpointResource (CRUD + test-send action) and OutboxMessageResource (read-only history,
   payload preview, retry). 87 Pest tests green incl. Livewire resource tests.
-- **Split note for Phase 3:** free package keeps Channels/Messages/Commands/Exceptions;
-  pro gets Models/Enums/Support/Jobs/Triggers/Filament + migrations. The channels reference
-  OutboxEndpoint/OutboxHistory directly — at split time guard those calls with class_exists
-  or move the trait's endpoint/history hooks behind an interface bound by the pro package.
-- Test harness: testbench + RefreshDatabase; Filament tests need the blade-icons providers and
-  `#[WithMigration]` (users table) — see tests/TestCase.php + tests/FilamentTestCase.php.
+- **Phase 3 split done (2026-07-11):** channels decoupled via container-bound contracts
+  (`Contracts\{EndpointResolver,Endpoint,HistoryRecorder,HistoryRecord}`, bound by the pro
+  provider; channels degrade gracefully unbound — no history, descriptive exception for
+  `->endpoint()`). Pro code physically moved to sibling repo
+  `~/PhpStormProjects/filament-outbox-pro` (`stboris/filament-outbox-pro`, license
+  proprietary, same `Stboris\FilamentOutbox` namespace root, path-repo dev dependency on
+  the free package, provider `FilamentOutboxProServiceProvider`, migration publish tag is
+  now `filament-outbox-pro-migrations`). This repo = free package: Channels/Messages/
+  Commands/Exceptions/Contracts + OutboxTestNotification, no Filament dependency, 53 tests.
+  Pro repo: Models/Enums/Support/Jobs/Triggers/Filament + migrations, 36 tests. READMEs
+  rewritten for both.
+- Test harness (pro repo): testbench + RefreshDatabase; Filament tests need the blade-icons
+  providers and `#[WithMigration]` (users table) — see tests/TestCase.php +
+  tests/FilamentTestCase.php in filament-outbox-pro. Free repo tests run without a database.
 
 ## Build phases
 
@@ -85,12 +93,13 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 
 ## Immediate next steps (start here)
 
-1. Scaffold repo `filament-notifier` (or pick final name — check Packagist for collisions)
-2. `composer.json` with spatie/laravel-package-tools, Filament v5 + Laravel 13 constraints
-3. Service provider + config file (`config/filament-notifier.php`)
-4. Port Discord webhook logic from crypto-predictor's Discord integration
-5. Set up DDEV-based test app (Laravel 13 + Filament v5) as a playground/workbench
-   (consider `orchestra/testbench` + Filament's plugin workbench instead)
+Phase 3 remainder — items needing Boris:
+
+1. Create private GitHub repo `stboris/filament-outbox-pro` and push the local repo
+2. Record demo video/GIFs (endpoint CRUD, test-send, history retry, triggers)
+3. Lemon Squeezy: create product, license key delivery, decide final price ($49–79)
+4. Publish free package on Packagist (public GitHub repo first)
+5. Then Phase 4: landing page → domain → filamentphp.com/plugins listing
 
 ## Decisions already made
 

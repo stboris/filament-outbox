@@ -4,7 +4,7 @@
          colors="true"
          cacheDirectory=".phpunit.cache">
     <testsuites>
-        <testsuite name="FilamentNotifier">
+        <testsuite name="FilamentOutbox">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

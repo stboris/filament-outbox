@@ -1,14 +1,13 @@
 # Filament Outbox
 
-Configurable notification channels for Laravel — **Discord**, **Slack**, and **generic signed webhooks** — with a Filament v5 admin panel on top (endpoint management, send history with retry, test-send, model-event triggers).
+Configurable notification channels for Laravel — **Discord**, **Slack**, and **generic signed webhooks** — built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
 
-> **Status: work in progress.** Channels and the Filament admin layer are functional; packaging/licensing split (free vs. Pro) is still pending.
+Need an admin UI? [Filament Outbox Pro](#filament-outbox-pro) adds a Filament v5 panel on top: endpoint management, send history with retry, test-send buttons, and model-event triggers.
 
 ## Requirements
 
 - PHP 8.3+
 - Laravel 13
-- Filament v5 (only for the admin panel features)
 
 ## Installation
 
@@ -118,60 +117,16 @@ php artisan outbox:test webhook --message="Custom check"
 
 Transient failures — connection errors, HTTP 429 rate limits, and 5xx responses — are automatically retried with exponential backoff (2 attempts by default, configurable via `http.retry` in the config). Permanent client errors (4xx) fail immediately with a descriptive `CouldNotSendNotification` exception.
 
-## Filament panel (Pro)
+## Filament Outbox Pro
 
-Publish the migrations and register the plugin on your panel:
+The Pro package adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels:
 
-```bash
-php artisan vendor:publish --tag="filament-outbox-migrations"
-php artisan migrate
-```
+- **Endpoint management** — named destinations managed in the panel instead of `.env` files: URL, per-environment scoping, enable toggle, channel defaults (bot username, extra headers, …), webhook signing secrets. Reference them from code with `->endpoint('team-alerts')` on any message.
+- **Send history** — every send attempt recorded with status, HTTP code, and payload preview; failed sends can be retried from the panel, with retries recorded as new, linked rows.
+- **Test-send** — a button on every endpoint to verify it end to end.
+- **Model-event triggers** — notify on `created`/`updated`/`deleted` for any model, with `{placeholder}` message templates and optional queued sending with retry/backoff. No notification class needed.
 
-```php
-use Stboris\FilamentOutbox\FilamentOutboxPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel->plugins([
-        FilamentOutboxPlugin::make(),
-    ]);
-}
-```
-
-You get two resources under an **Outbox** navigation group:
-
-- **Endpoints** — named destinations (Discord/Slack/webhook URL, per-environment scoping, enable toggle, channel defaults like bot username or extra headers, webhook signing secret) with a **Send test** action per row.
-- **Send history** — every send attempt with status, HTTP code, payload preview, and a **Retry** action for failures. Retries are recorded as new, linked history rows. Old rows are pruned by `php artisan model:prune` after `history.prune_after_days` (default 30).
-
-### Named endpoints from code
-
-```php
-public function toDiscord(object $notifiable): DiscordMessage
-{
-    return DiscordMessage::make('Deploy finished ✅')->endpoint('team-alerts');
-}
-```
-
-The endpoint supplies the URL, channel defaults, and (for webhooks) the signing secret. Disabled endpoints and endpoints scoped to another environment skip quietly — so `->endpoint('team-alerts')` is safe to leave in code across local/staging/production.
-
-### Model-event triggers
-
-Send notifications automatically when models change — no notification class needed:
-
-```php
-// config/filament-outbox.php
-'triggers' => [
-    \App\Models\Order::class => [
-        'events' => ['created', 'deleted'],
-        'channels' => ['discord', 'webhook'],
-        'endpoints' => ['discord' => 'team-alerts'],
-        'template' => 'Order #{id} was {event} — total {total}',
-        'queue' => true, // send via queue with retry/backoff (3 tries)
-    ],
-],
-```
-
-Templates accept `{attribute}` placeholders (dot notation supported) plus `{model}`, `{key}` and `{event}`. Webhook channels additionally receive a structured JSON payload (`event`, `model`, `key`, `attributes`, `occurred_at`).
+Pro is a separate, commercial package that plugs into this one — nothing in your notification code changes when you add it.
 
 ## Testing
 
@@ -181,4 +136,4 @@ composer test
 
 ## License
 
-MIT for the base channels. The Filament admin panel (Pro) will be licensed separately.
+MIT.
