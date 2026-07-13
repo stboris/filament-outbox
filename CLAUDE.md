@@ -93,17 +93,22 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 
 ## Immediate next steps (start here)
 
-Phase 3 remainder — everything scriptable is done (free repo pushed + tagged v1.0.0,
-pro repo committed locally with workbench demo app + docs/LAUNCH.md launch checklist,
-gh CLI installed). Blocked on Boris only:
+Done so far: free repo public on GitHub + tagged v1.0.0; pro repo private on GitHub
+(`stboris/filament-outbox-pro`, workbench demo app + docs/LAUNCH.md); **Phase 4 landing
+page built** in `~/PhpStormProjects/filament-outbox-site` (private repo
+`stboris/filament-outbox-site`, static HTML + Tailwind v4, privacy/impressum pages with
+cookieless-Matomo wording, deploy.sh for cyon). **Domain bought: filamentoutbox.com**
+(2026-07-13). Distribution decision re-confirmed: Lemon Squeezy MoR (Anystack/Privato
+rejected — not merchants of record, own-Stripe VAT burden).
 
-1. `gh auth login` — then Claude can create the private `stboris/filament-outbox-pro`
-   repo, push it, and make the free repo public
-2. Submit free package on Packagist: https://packagist.org/packages/submit (+ webhook)
-3. Record demo GIFs — shot list + seeded demo panel in pro repo's docs/LAUNCH.md
-   (`composer serve`, login demo@example.com/password)
-4. Lemon Squeezy store + product — full checklist and product copy in docs/LAUNCH.md
-5. Then Phase 4: landing page → domain → filamentphp.com/plugins listing
+Remaining (Boris):
+1. Submit free package on Packagist: https://packagist.org/packages/submit (+ webhook)
+2. Record demo GIFs — shot list in pro repo docs/LAUNCH.md (`composer serve`,
+   demo@example.com/password)
+3. Lemon Squeezy store + product ($59) — checklist/copy in docs/LAUNCH.md; then put the
+   real buy URL in the site's index.html (REPLACE-ME)
+4. Site: fill deploy.sh SSH target, set up Matomo, deploy, enable HTTPS
+5. Submit filamentphp.com/plugins listing (free: Packagist link; Pro: filamentoutbox.com)
 
 ## Decisions already made
 
