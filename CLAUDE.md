@@ -101,14 +101,16 @@ cookieless-Matomo wording, deploy.sh for cyon). **Domain bought: filamentoutbox.
 (2026-07-13). Distribution decision re-confirmed: Lemon Squeezy MoR (Anystack/Privato
 rejected — not merchants of record, own-Stripe VAT burden).
 
+**LAUNCHED (2026-07-14):** Packagist live; demo GIFs recorded (docs/demo in pro repo,
+asset map in docs/LAUNCH.md); Lemon Squeezy store + product live ($59 USD, license keys
+unlimited length/10 activations, dist zip v1.0.0 attached, test purchase verified);
+site deployed with real checkout URL + Matomo + demo videos.
+
 Remaining (Boris):
-1. Submit free package on Packagist: https://packagist.org/packages/submit (+ webhook)
-2. Record demo GIFs — shot list in pro repo docs/LAUNCH.md (`composer serve`,
-   demo@example.com/password)
-3. Lemon Squeezy store + product ($59) — checklist/copy in docs/LAUNCH.md; then put the
-   real buy URL in the site's index.html (REPLACE-ME)
-4. Site: fill deploy.sh SSH target, set up Matomo, deploy, enable HTTPS
-5. Submit filamentphp.com/plugins listing (free: Packagist link; Pro: filamentoutbox.com)
+1. Submit filamentphp.com/plugins listing via filamentphp.com/author (free: Packagist
+   link; Pro: filamentoutbox.com) — request author access early, approval takes time
+2. Announce: Filament Discord #plugins, Laravel News links form
+3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
 ## Decisions already made
 

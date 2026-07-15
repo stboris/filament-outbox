@@ -119,7 +119,12 @@ Transient failures — connection errors, HTTP 429 rate limits, and 5xx response
 
 ## Filament Outbox Pro
 
-The Pro package adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels:
+The Pro package adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels.
+
+<p>
+  <img src="https://filamentoutbox.com/assets/demo/test-send.gif" alt="Test-send from the Filament panel" width="49%">
+  <img src="https://filamentoutbox.com/assets/demo/discord-receive.gif" alt="The test notification arriving in Discord" width="49%">
+</p>
 
 - **Endpoint management** — named destinations managed in the panel instead of `.env` files: URL, per-environment scoping, enable toggle, channel defaults (bot username, extra headers, …), webhook signing secrets. Reference them from code with `->endpoint('team-alerts')` on any message.
 - **Send history** — every send attempt recorded with status, HTTP code, and payload preview; failed sends can be retried from the panel, with retries recorded as new, linked rows.
