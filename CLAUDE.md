@@ -106,10 +106,16 @@ asset map in docs/LAUNCH.md); Lemon Squeezy store + product live ($59 USD, licen
 unlimited length/10 activations, dist zip v1.0.0 attached, test purchase verified);
 site deployed with real checkout URL + Matomo + demo videos.
 
+filamentphp.com listing: submitted, rejected once (image must highlight functionality,
+crop sidebar/topbar, add name + tagline as text) — image rebuilt (composed light hero:
+table card capture + HTML-native toast, docs/demo/filament-listing-{hero,thumb}.jpg in
+pro repo, source HTML in that session's scratchpad), **resubmitted 2026-07-16, awaiting
+review**.
+
 Remaining (Boris):
-1. Submit filamentphp.com/plugins listing via filamentphp.com/author (free: Packagist
-   link; Pro: filamentoutbox.com) — request author access early, approval takes time
-2. Announce: Filament Discord #plugins, Laravel News links form
+1. Wait for filamentphp.com listing approval; if more reviewer feedback comes, rework
+   the same composed image (it's a single HTML file rendered via Playwright)
+2. After approval — announce: Filament Discord #plugins, Laravel News links form
 3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
 ## Decisions already made
