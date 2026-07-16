@@ -109,8 +109,7 @@ site deployed with real checkout URL + Matomo + demo videos.
 filamentphp.com listing: submitted, rejected once (image must highlight functionality,
 crop sidebar/topbar, add name + tagline as text) — image rebuilt (composed light hero:
 table card capture + HTML-native toast, docs/demo/filament-listing-{hero,thumb}.jpg in
-pro repo, source HTML in that session's scratchpad), **resubmitted 2026-07-16, awaiting
-review**.
+pro repo, sources in docs/demo/listing-src/), **resubmitted 2026-07-16, awaiting review**.
 
 Remaining (Boris):
 1. Wait for filamentphp.com listing approval; if more reviewer feedback comes, rework
