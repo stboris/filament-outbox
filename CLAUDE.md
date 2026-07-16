@@ -106,15 +106,18 @@ asset map in docs/LAUNCH.md); Lemon Squeezy store + product live ($59 USD, licen
 unlimited length/10 activations, dist zip v1.0.0 attached, test purchase verified);
 site deployed with real checkout URL + Matomo + demo videos.
 
-filamentphp.com listing: submitted, rejected once (image must highlight functionality,
-crop sidebar/topbar, add name + tagline as text) — image rebuilt (composed light hero:
-table card capture + HTML-native toast, docs/demo/filament-listing-{hero,thumb}.jpg in
-pro repo, sources in docs/demo/listing-src/), **resubmitted 2026-07-16, awaiting review**.
+filamentphp.com listing: **APPROVED and live (2026-07-16)** after one image rework.
+
+Lemon Squeezy store: **awaiting LS activation** — checkout still opens in test mode, so
+the site's Buy button is temporarily disabled (2026-07-16): disabled-look button +
+notify-me mailto (info@filamentoutbox.com), original link kept in `TEMP(store-approval)`
+comment markers in filament-outbox-site/index.html. To reinstate when LS approves:
+delete the temp block, uncomment the original, `./deploy.sh`.
 
 Remaining (Boris):
-1. Wait for filamentphp.com listing approval; if more reviewer feedback comes, rework
-   the same composed image (it's a single HTML file rendered via Playwright)
-2. After approval — announce: Filament Discord #plugins, Laravel News links form
+1. When Lemon Squeezy activates the store — reinstate the Buy button (see above) and
+   email anyone who wrote to info@filamentoutbox.com asking to be notified
+2. Announce: Filament Discord #plugins, Laravel News links form
 3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
 ## Decisions already made
