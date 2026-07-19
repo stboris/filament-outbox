@@ -128,7 +128,11 @@ plugins; Outbox is still the only paid outbound-delivery plugin (Ralph J. Smit's
 Notifications Pro is in-app/database only — no overlap). Second-product candidate parked:
 unified ops suite (schedule+queue monitoring w/ alert rules, synergy with Outbox channels).
 
-**5a. Teams channel (priority, ~2 evenings) — free repo + pro touchpoints**
+**5a. Teams channel — CODE DONE (2026-07-19), unreleased.** Free 6bc3ddc (65 tests),
+pro e112c1d (39 tests). Before tagging v1.1.0: real-world check against an actual Teams
+Workflows webhook (`php artisan outbox:test teams --to=...`), then release train below.
+
+**5a original spec (~2 evenings) — free repo + pro touchpoints**
 - Target the NEW mechanism: Power Automate Workflows webhook URLs + Adaptive Card payload
   (`{"type":"message","attachments":[{"contentType":"application/vnd.microsoft.card.adaptive",
   "content":{AdaptiveCard 1.4}}]}`). Classic Office 365 Connector webhooks retire
