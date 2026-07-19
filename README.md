@@ -1,6 +1,6 @@
 # Filament Outbox
 
-Configurable notification channels for Laravel — **Discord**, **Slack**, and **generic signed webhooks** — built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
+Configurable notification channels for Laravel — **Discord**, **Slack**, **Microsoft Teams**, and **generic signed webhooks** — built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
 
 Need an admin UI? [Filament Outbox Pro](#filament-outbox-pro) adds a Filament v5 panel on top: endpoint management, send history with retry, test-send buttons, and model-event triggers.
 
@@ -77,6 +77,29 @@ public function toSlack(object $notifiable): SlackMessage
 }
 ```
 
+### Microsoft Teams (Workflows webhook)
+
+Sends [Adaptive Cards](https://adaptivecards.io) to the webhook URL of a Power Automate workflow (the *"When a Teams webhook request is received"* trigger) — the mechanism that replaces the retired Office 365 Connector webhooks.
+
+```php
+use Stboris\FilamentOutbox\Messages\TeamsMessage;
+
+public function via(object $notifiable): array
+{
+    return ['teams'];
+}
+
+public function toTeams(object $notifiable): TeamsMessage
+{
+    return TeamsMessage::make('Deploy finished without errors.')
+        ->title('Deployment')
+        ->color('good')
+        ->facts(['Version' => 'v2.14.0', 'Environment' => 'production']);
+}
+```
+
+`->block([...])` appends raw Adaptive Card elements; `->card([...])` replaces the generated card entirely.
+
 ### Generic webhook
 
 ```php
@@ -110,6 +133,7 @@ Verify any endpoint from the command line before relying on it:
 ```bash
 php artisan outbox:test discord --to="https://discord.com/api/webhooks/..."
 php artisan outbox:test slack                     # uses the configured default URL
+php artisan outbox:test teams --to="https://.../workflows/.../invoke"
 php artisan outbox:test webhook --message="Custom check"
 ```
 

@@ -10,7 +10,7 @@ use Throwable;
 class OutboxTestCommand extends Command
 {
     protected $signature = 'outbox:test
-        {channel : The channel to test: discord, slack or webhook}
+        {channel : The channel to test: discord, slack, teams or webhook}
         {--to= : Destination URL (defaults to the configured one)}
         {--message= : Custom text for the test notification}';
 
@@ -21,7 +21,7 @@ class OutboxTestCommand extends Command
         $channel = strtolower((string) $this->argument('channel'));
 
         if (! OutboxTestNotification::supports($channel)) {
-            $this->error("Unknown channel [{$channel}]. Available: discord, slack, webhook.");
+            $this->error("Unknown channel [{$channel}]. Available: discord, slack, teams, webhook.");
 
             return self::FAILURE;
         }

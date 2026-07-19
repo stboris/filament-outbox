@@ -5,10 +5,12 @@ namespace Stboris\FilamentOutbox\Notifications;
 use Illuminate\Notifications\Notification;
 use Stboris\FilamentOutbox\Channels\DiscordChannel;
 use Stboris\FilamentOutbox\Channels\SlackChannel;
+use Stboris\FilamentOutbox\Channels\TeamsChannel;
 use Stboris\FilamentOutbox\Channels\WebhookChannel;
 use Stboris\FilamentOutbox\Messages\DiscordEmbed;
 use Stboris\FilamentOutbox\Messages\DiscordMessage;
 use Stboris\FilamentOutbox\Messages\SlackMessage;
+use Stboris\FilamentOutbox\Messages\TeamsMessage;
 use Stboris\FilamentOutbox\Messages\WebhookMessage;
 
 /**
@@ -20,6 +22,7 @@ class OutboxTestNotification extends Notification
     protected const CHANNELS = [
         'discord' => DiscordChannel::class,
         'slack' => SlackChannel::class,
+        'teams' => TeamsChannel::class,
         'webhook' => WebhookChannel::class,
     ];
 
@@ -56,6 +59,13 @@ class OutboxTestNotification extends Notification
             ->section($this->text()));
     }
 
+    public function toTeams(object $notifiable): TeamsMessage
+    {
+        return $this->route(TeamsMessage::make($this->text())
+            ->title('🔔 Test notification')
+            ->color('good'));
+    }
+
     public function toWebhook(object $notifiable): WebhookMessage
     {
         return $this->route(WebhookMessage::make([
@@ -65,7 +75,7 @@ class OutboxTestNotification extends Notification
         ]));
     }
 
-    protected function route(DiscordMessage|SlackMessage|WebhookMessage $message): DiscordMessage|SlackMessage|WebhookMessage
+    protected function route(DiscordMessage|SlackMessage|TeamsMessage|WebhookMessage $message): DiscordMessage|SlackMessage|TeamsMessage|WebhookMessage
     {
         if ($this->endpoint !== null) {
             $message->endpoint($this->endpoint);

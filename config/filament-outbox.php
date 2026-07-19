@@ -28,6 +28,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Microsoft Teams (Workflows webhook)
+    |--------------------------------------------------------------------------
+    |
+    | URL from a Power Automate workflow using the "When a Teams webhook
+    | request is received" trigger — the replacement for the retired Office
+    | 365 Connector webhooks. Messages are sent as Adaptive Cards.
+    |
+    */
+
+    'teams' => [
+        'webhook_url' => env('OUTBOX_TEAMS_WEBHOOK_URL'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Generic webhook
     |--------------------------------------------------------------------------
     |

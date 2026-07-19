@@ -3,12 +3,14 @@
 use Illuminate\Notifications\ChannelManager;
 use Stboris\FilamentOutbox\Channels\DiscordChannel;
 use Stboris\FilamentOutbox\Channels\SlackChannel;
+use Stboris\FilamentOutbox\Channels\TeamsChannel;
 use Stboris\FilamentOutbox\Channels\WebhookChannel;
 
-it('registers the discord and webhook channel aliases', function () {
+it('registers the discord, teams and webhook channel aliases', function () {
     $manager = app(ChannelManager::class);
 
     expect($manager->driver('discord'))->toBeInstanceOf(DiscordChannel::class)
+        ->and($manager->driver('teams'))->toBeInstanceOf(TeamsChannel::class)
         ->and($manager->driver('webhook'))->toBeInstanceOf(WebhookChannel::class);
 });
 

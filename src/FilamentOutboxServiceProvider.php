@@ -8,6 +8,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Stboris\FilamentOutbox\Channels\DiscordChannel;
 use Stboris\FilamentOutbox\Channels\SlackChannel;
+use Stboris\FilamentOutbox\Channels\TeamsChannel;
 use Stboris\FilamentOutbox\Channels\WebhookChannel;
 use Stboris\FilamentOutbox\Commands\OutboxTestCommand;
 
@@ -25,6 +26,7 @@ class FilamentOutboxServiceProvider extends PackageServiceProvider
     {
         Notification::resolved(function (ChannelManager $service) {
             $service->extend('discord', fn ($app) => $app->make(DiscordChannel::class));
+            $service->extend('teams', fn ($app) => $app->make(TeamsChannel::class));
             $service->extend('webhook', fn ($app) => $app->make(WebhookChannel::class));
 
             // Only claim the 'slack' alias when the official

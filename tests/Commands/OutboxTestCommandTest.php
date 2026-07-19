@@ -26,6 +26,17 @@ it('sends a webhook test notification with a custom message', function () {
         && $request['message'] === 'Custom check');
 });
 
+it('sends a teams test notification as an adaptive card', function () {
+    Http::fake(['*' => Http::response(null, 202)]);
+
+    $this->artisan('outbox:test', ['channel' => 'teams', '--to' => 'https://teams.test/workflows/abc'])
+        ->expectsOutputToContain('Test notification sent via [teams]')
+        ->assertSuccessful();
+
+    Http::assertSent(fn ($request) => $request->url() === 'https://teams.test/workflows/abc'
+        && $request['attachments'][0]['content']['body'][0]['text'] === '🔔 Test notification');
+});
+
 it('uses the configured default url when --to is omitted', function () {
     Http::fake(['*' => Http::response('ok')]);
     config()->set('filament-outbox.slack.webhook_url', 'https://config.slack.test/hook');
