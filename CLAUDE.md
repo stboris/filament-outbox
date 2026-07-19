@@ -120,6 +120,55 @@ Remaining (Boris):
 2. Announce: Filament Discord #plugins, Laravel News links form
 3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
+## Phase 5 — Outbox v1.1/v1.2 roadmap (planned 2026-07-19)
+
+Decision: extend Outbox instead of starting a second product (no sales data yet; existing
+funnel is live; marginal cost low). Market research 2026-07-19: ~79 paid of 921 directory
+plugins; Outbox is still the only paid outbound-delivery plugin (Ralph J. Smit's
+Notifications Pro is in-app/database only — no overlap). Second-product candidate parked:
+unified ops suite (schedule+queue monitoring w/ alert rules, synergy with Outbox channels).
+
+**5a. Teams channel (priority, ~2 evenings) — free repo + pro touchpoints**
+- Target the NEW mechanism: Power Automate Workflows webhook URLs + Adaptive Card payload
+  (`{"type":"message","attachments":[{"contentType":"application/vnd.microsoft.card.adaptive",
+  "content":{AdaptiveCard 1.4}}]}`). Classic Office 365 Connector webhooks retire
+  2026-05-18..22 — old `outlook.office.com/webhook/` URLs die. MessageCard is deprecated
+  (Workflows accepts it, but buttons don't render). Marketing angle: the free
+  laravel-notification-channels/microsoft-teams package is MessageCard-era; we're
+  Workflows-native.
+- Free repo: `Messages/TeamsMessage` (fluent: make/title/facts/color + RoutesToEndpoint),
+  `Channels/TeamsChannel` (mirror SlackChannel: `toTeams()`, string coercion,
+  resolveDestination with `filament-outbox.teams.webhook_url`, endpoint setting defaults),
+  config `teams.webhook_url` (OUTBOX_TEAMS_WEBHOOK_URL), provider alias `teams`,
+  `outbox:test` + OutboxTestNotification support. Workflows replies 202/empty — any 2xx is
+  success; existing 429/5xx retry applies. Pest tests w/ Http::fake (card shape, routing,
+  invalid-message exceptions).
+- Pro repo: add `teams` to OutboxEndpointForm channel Select (+ visible() settings if any),
+  test-send + triggers accept it (channel column is a plain string — no migration),
+  Resender needs nothing (re-signing is webhook-only). Livewire tests.
+
+**5b. Telegram channel (~2 evenings)**
+- Bot API `POST https://api.telegram.org/bot{token}/sendMessage` with chat_id/text/
+  parse_mode (HTML to start; MarkdownV2 escaping is a minefield — punt). No buttons in v1.
+- CAUTION: the bot token is IN the URL — history recording and exceptions must store a
+  redacted URL (`bot***:***/sendMessage`). Pro form: token as password input, chat_id field.
+- Config `telegram.{bot_token,chat_id}`; endpoint settings override both.
+
+**5c. Alert hygiene: throttle/dedup (~2–3 evenings, pro — needs DB)**
+- `->dedupKey('deploy-failed')` on messages + per-trigger `throttle` config (max 1 send
+  per key per N minutes). Implement via outbox_messages lookup (cache fallback);
+  suppressed sends recorded with new MessageStatus::Suppressed so the history shows them.
+  This is the feature no competitor has; justifies later $59→$79 price move.
+
+**5d. Endpoint health (~1–2 evenings, pro)**
+- Success-rate widget per endpoint (24h/7d from outbox_messages), consecutive-failure
+  alarm: "when endpoint X fails N times in a row, notify via endpoint Y".
+
+**5e. Digests/batching (optional — only if users ask; cut by default)**
+
+Release train per phase: free repo tag minor → rebuild pro dist zip → upload to Lemon
+Squeezy release → README both repos → site feature grid + og copy if needed → announce.
+
 ## Decisions already made
 
 - **Name: "Filament Outbox"** (`stboris/filament-outbox`, namespace `Stboris\FilamentOutbox`).
