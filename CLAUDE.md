@@ -91,6 +91,52 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
    deploy → then submit the filamentphp.com/plugins listing (moved here from Phase 3, since
    the listing links to this page as the purchase URL).
 
+## Merchant of record: switching Lemon Squeezy → Polar (decided 2026-07-20)
+
+Lemon Squeezy store activation, requested 2026-07-14, sat unactivated with zero support
+response for 6+ days. Research before switching: Trustpilot/Product Hunt/Reddit show a
+consistent, high-volume pattern of opaque "risk" account holds and multi-week support
+silence — not isolated complaints (one aggregator rates support-unresponsiveness 8/10 and
+unexplained-suspension 10/10 severity across dozens of sources). Structural cause found:
+Stripe (which acquired Lemon Squeezy in 2024) launched its own native MoR product,
+**Stripe Managed Payments**, in public preview Feb 2026, and Lemon Squeezy's own blog now
+frames itself as a migration path *into* that product — strong signal LS is being wound
+down, plausibly explaining the stalled, unanswered activation.
+
+Stripe Managed Payments itself was ruled out: it has **no native license-key or file-
+delivery support** — would need a bolted-on third-party service (Keyforge/CheckoutKeys),
+adding a dependency against this project's "minimal dependencies" constraint.
+
+**Decision: move to [Polar.sh](https://polar.sh).** Still a genuine merchant of record
+(handles VAT/tax — the same requirement that ruled out Anystack/Privato originally), has
+native License Keys + File Downloads benefits matching the current LS setup feature-for-
+feature, cheaper (4% + $0.40 vs LS's 5% + $0.50), and currently has a materially better
+support/trust reputation than LS post-acquisition. Caveat: Polar's own docs say initial
+account review can also take up to 14 days, and their own guidance is to fully build the
+product/checkout *before* submitting for review — do that first to not lose the time twice.
+KYC is individual-friendly: passport/ID + selfie via Stripe Identity, no company entity
+needed (this was Boris's blocker for a Microsoft 365 tenant test account, but is not one
+here).
+
+**Switching cost right now: zero.** No live sales, no issued license keys, no order
+history on Lemon Squeezy — this is the cheapest point to switch. Lemon Squeezy store can
+simply be abandoned (deactivate later; no urgency, nothing to migrate).
+
+**Setup steps (Boris — account creation/KYC/payout only he can do):**
+1. Sign up at polar.sh (GitHub/Google/email), create an organization.
+2. Build the product FIRST, before submitting for review (their own advice for faster
+   approval): one-time purchase, $59, License Keys benefit (unlimited activations or match
+   LS's 10 — Polar's config may differ, check at setup time), File Downloads benefit —
+   upload `filament-outbox-pro-v1.1.0.zip` (already built, see Phase 5a below). Reuse the
+   Lemon Squeezy product description drafted 2026-07-20 (mentions Teams).
+3. Submit for review; complete identity verification (Stripe Identity) and connect a
+   payout account (Stripe Connect Express).
+4. Once approved and a real checkout link exists, tell Claude — the site swap (buy button,
+   FAQ copy, impressum.html + privacy.html merchant-of-record sections, README pricing
+   copy) is a batch of file edits ready to run in one pass. Do NOT update the legal pages
+   to name Polar before the relationship is real.
+5. Deactivate (don't delete) the Lemon Squeezy store/product once Polar is live.
+
 ## Immediate next steps (start here)
 
 Done so far: free repo public on GitHub + tagged v1.0.0; pro repo private on GitHub
