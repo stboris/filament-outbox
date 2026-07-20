@@ -128,9 +128,17 @@ plugins; Outbox is still the only paid outbound-delivery plugin (Ralph J. Smit's
 Notifications Pro is in-app/database only — no overlap). Second-product candidate parked:
 unified ops suite (schedule+queue monitoring w/ alert rules, synergy with Outbox channels).
 
-**5a. Teams channel — CODE DONE (2026-07-19), unreleased.** Free 6bc3ddc (65 tests),
-pro e112c1d (39 tests). Before tagging v1.1.0: real-world check against an actual Teams
-Workflows webhook (`php artisan outbox:test teams --to=...`), then release train below.
+**5a. Teams channel — SHIPPED (2026-07-20).** Free v1.1.0 tagged + pushed, live on
+Packagist within seconds via the GitHub webhook. Pro v1.1.0 tagged + pushed; dist zip
+built at filament-outbox-pro/filament-outbox-pro-v1.1.0.zip (Teams code confirmed present
+inside). Validated without a Teams business tenant (Boris didn't have one and didn't want
+to fake a company signup): Adaptive Cards Designer (adaptivecards.io/designer, schema-valid
+render) + webhook.site wire-level capture (byte-exact JSON, emoji/encoding intact). Real
+Microsoft Workflows acceptance still unconfirmed — low risk, it's their documented schema.
+
+**Remaining for this release (Boris):** upload `filament-outbox-pro-v1.1.0.zip` to the
+Lemon Squeezy product as a new file version (Products → Filament Outbox Pro → Files) —
+manual step, no LS API access configured. Fine to do even before store activation.
 
 **5a original spec (~2 evenings) — free repo + pro touchpoints**
 - Target the NEW mechanism: Power Automate Workflows webhook URLs + Adaptive Card payload
