@@ -1,12 +1,13 @@
 {
     "name": "stboris/filament-outbox",
-    "description": "Configurable notification channels (Discord, Slack, generic webhook) for Laravel, with a Filament v5 admin panel on top.",
+    "description": "Configurable notification channels (Discord, Slack, Microsoft Teams, generic webhook) for Laravel, with a Filament v5 admin panel on top.",
     "keywords": [
         "laravel",
         "filament",
         "notifications",
         "discord",
         "slack",
+        "microsoft-teams",
         "webhook"
     ],
     "license": "MIT",
