@@ -91,7 +91,20 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
    deploy → then submit the filamentphp.com/plugins listing (moved here from Phase 3, since
    the listing links to this page as the purchase URL).
 
-## Merchant of record: switching Lemon Squeezy → Polar (decided 2026-07-20)
+## Merchant of record: switched Lemon Squeezy → Polar — DONE (2026-07-21)
+
+Polar account approved same day as signup: identity verified (Stripe Identity, passport +
+selfie), payout account connected, product ("Filament Outbox Pro", $59, License Keys +
+File Downloads benefits) created, checkout link live, $0 discount-code test purchase
+completed end-to-end (order email, license key generated with no expiry, correct zip
+downloaded). Confirmed via Finance → Account: "Account approved... reviewed and
+approved." Site swapped and deployed 2026-07-21 (filament-outbox-site 212895e): buy
+button now points to `https://buy.polar.sh/polar_cl_VjIN5bKsu0zNq7RtlAfAc6uZnS2G9PNe952eA2pFTGx`,
+impressum.html/privacy.html/FAQ/JSON-LD all name Polar Software, Inc. instead of Lemon
+Squeezy. Lemon Squeezy store left inactive (nothing to migrate, zero real sales occurred
+there). Detailed rationale for the switch below, kept for reference.
+
+### Original decision (2026-07-20)
 
 Lemon Squeezy store activation, requested 2026-07-14, sat unactivated with zero support
 response for 6+ days. Research before switching: Trustpilot/Product Hunt/Reddit show a
@@ -110,32 +123,22 @@ adding a dependency against this project's "minimal dependencies" constraint.
 **Decision: move to [Polar.sh](https://polar.sh).** Still a genuine merchant of record
 (handles VAT/tax — the same requirement that ruled out Anystack/Privato originally), has
 native License Keys + File Downloads benefits matching the current LS setup feature-for-
-feature, cheaper (4% + $0.40 vs LS's 5% + $0.50), and currently has a materially better
-support/trust reputation than LS post-acquisition. Caveat: Polar's own docs say initial
-account review can also take up to 14 days, and their own guidance is to fully build the
-product/checkout *before* submitting for review — do that first to not lose the time twice.
-KYC is individual-friendly: passport/ID + selfie via Stripe Identity, no company entity
-needed (this was Boris's blocker for a Microsoft 365 tenant test account, but is not one
-here).
+feature, and currently has a materially better
+support/trust reputation than LS post-acquisition. Fee turned out to be the same 5% +
+$0.50 as Lemon Squeezy on Polar's free plan (the 4% + $0.40 figure from initial research
+is a discounted paid-plan rate) — didn't change the decision, switch was about reliability
+not price. KYC is individual-friendly: passport/ID + selfie via Stripe Identity, no
+company entity needed (this was Boris's blocker for a Microsoft 365 tenant test account,
+but is not one here) — and in practice the account was reviewed and approved same-day.
 
 **Switching cost right now: zero.** No live sales, no issued license keys, no order
 history on Lemon Squeezy — this is the cheapest point to switch. Lemon Squeezy store can
 simply be abandoned (deactivate later; no urgency, nothing to migrate).
 
-**Setup steps (Boris — account creation/KYC/payout only he can do):**
-1. Sign up at polar.sh (GitHub/Google/email), create an organization.
-2. Build the product FIRST, before submitting for review (their own advice for faster
-   approval): one-time purchase, $59, License Keys benefit (unlimited activations or match
-   LS's 10 — Polar's config may differ, check at setup time), File Downloads benefit —
-   upload `filament-outbox-pro-v1.1.0.zip` (already built, see Phase 5a below). Reuse the
-   Lemon Squeezy product description drafted 2026-07-20 (mentions Teams).
-3. Submit for review; complete identity verification (Stripe Identity) and connect a
-   payout account (Stripe Connect Express).
-4. Once approved and a real checkout link exists, tell Claude — the site swap (buy button,
-   FAQ copy, impressum.html + privacy.html merchant-of-record sections, README pricing
-   copy) is a batch of file edits ready to run in one pass. Do NOT update the legal pages
-   to name Polar before the relationship is real.
-5. Deactivate (don't delete) the Lemon Squeezy store/product once Polar is live.
+**Setup steps — all done 2026-07-21**, see status note at the top of this section.
+Remaining housekeeping (low priority, no urgency): deactivate the Lemon Squeezy
+store/product now that Polar is live — nothing to migrate, zero real sales ever occurred
+there.
 
 ## Immediate next steps (start here)
 
