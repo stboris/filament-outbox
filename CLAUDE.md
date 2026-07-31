@@ -34,7 +34,7 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 - No admin UI - just the Laravel Notification channel
 - Published on Packagist + listed free on filamentphp.com/plugins
 
-### Pro tier ($49–79 one-time, sold via Lemon Squeezy - merchant of record, handles EU/CH VAT)
+### Pro tier ($59 one-time, sold via Polar - merchant of record, handles EU/CH VAT)
 - Slack channel + generic webhook channel
 - Filament resource: manage endpoints (CRUD, per-environment config)
 - Send history table widget with status, payload preview, retry action
@@ -75,18 +75,18 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
    channels, tests (Pest)
 2. **Phase 2 (3–4 evenings):** Filament plugin class, endpoint resource, send-history
    widget, test-send action, model-event trigger wiring
-3. **Phase 3 (2–3 evenings):** README + docs site page, demo video/GIFs, Lemon Squeezy
+3. **Phase 3 (2–3 evenings):** README + docs site page, demo video/GIFs, Polar
    product + license key delivery
 4. **Phase 4 (2–3 evenings): Product landing page.** Professional marketing site for the
    plugin - must NOT look AI-generated; benchmark against landing pages of best-selling
    Filament plugin authors (e.g. Ralph J. Smit's plugin pages at ralphjsmit.com, Kenneth
    Sese's Advanced Tables, filamentphp.com featured paid plugins - research current best
    examples at design time). Tech stack: **static HTML + Tailwind CSS** (standalone Tailwind
-   CLI, no Laravel/Filament, no JS framework) - Lemon Squeezy checkout is a hosted
+   CLI, no Laravel/Filament, no JS framework) - Polar checkout is a hosted
    link/overlay so no backend is needed, and a static site deploys anywhere (cyon shared
    hosting or any static host) with zero maintenance. Content: dark-mode hero with real
    admin-UI screenshot, feature grid, short code snippet (`->endpoint('name')` DX), demo
-   GIF from Phase 3, Free-vs-Pro pricing table with Lemon Squeezy buy button, FAQ,
+   GIF from Phase 3, Free-vs-Pro pricing table with Polar buy button, FAQ,
    changelog/docs links. Flow: build design → Boris reviews and buys a domain to match →
    deploy → then submit the filamentphp.com/plugins listing (moved here from Phase 3, since
    the listing links to this page as the purchase URL).
@@ -147,25 +147,25 @@ Done so far: free repo public on GitHub + tagged v1.0.0; pro repo private on Git
 page built** in `~/PhpStormProjects/filament-outbox-site` (private repo
 `stboris/filament-outbox-site`, static HTML + Tailwind v4, privacy/impressum pages with
 cookieless-Matomo wording, deploy.sh for cyon). **Domain bought: filamentoutbox.com**
-(2026-07-13). Distribution decision re-confirmed: Lemon Squeezy MoR (Anystack/Privato
-rejected - not merchants of record, own-Stripe VAT burden).
+(2026-07-13). Distribution: **Polar** as merchant of record since 2026-07-21
+(Anystack/Privato stay rejected - they are not merchants of record, so the Stripe VAT
+burden would be Boris's own).
 
 **LAUNCHED (2026-07-14):** Packagist live; demo GIFs recorded (docs/demo in pro repo,
-asset map in docs/LAUNCH.md); Lemon Squeezy store + product live ($59 USD, license keys
+asset map in docs/LAUNCH.md); store + product live ($59 USD, license keys
 unlimited length/10 activations, dist zip v1.0.0 attached, test purchase verified);
 site deployed with real checkout URL + Matomo + demo videos.
 
 filamentphp.com listing: **APPROVED and live (2026-07-16)** after one image rework.
 
-Lemon Squeezy store: **awaiting LS activation** - checkout still opens in test mode, so
-the site's Buy button is temporarily disabled (2026-07-16): disabled-look button +
-notify-me mailto (info@filamentoutbox.com), original link kept in `TEMP(store-approval)`
-comment markers in filament-outbox-site/index.html. To reinstate when LS approves:
-delete the temp block, uncomment the original, `./deploy.sh`.
+Checkout: **live on Polar since 2026-07-21.** The 2026-07-16 workaround for the stalled
+Lemon Squeezy activation - disabled-look Buy button plus a notify-me mailto, kept between
+`TEMP(store-approval)` comment markers in filament-outbox-site/index.html - is obsolete;
+the site was redeployed with the real Polar checkout link (filament-outbox-site 212895e).
 
 Remaining (Boris):
-1. When Lemon Squeezy activates the store - reinstate the Buy button (see above) and
-   email anyone who wrote to info@filamentoutbox.com asking to be notified
+1. Email anyone who wrote to info@filamentoutbox.com asking to be notified while the Buy
+   button was disabled
 2. Announce: Filament Discord #plugins, Laravel News links form
 3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
@@ -186,8 +186,8 @@ render) + webhook.site wire-level capture (byte-exact JSON, emoji/encoding intac
 Microsoft Workflows acceptance still unconfirmed - low risk, it's their documented schema.
 
 **Remaining for this release (Boris):** upload `filament-outbox-pro-v1.1.0.zip` to the
-Lemon Squeezy product as a new file version (Products → Filament Outbox Pro → Files) -
-manual step, no LS API access configured. Fine to do even before store activation.
+Polar product as a new file version (Products → Filament Outbox Pro → File Downloads
+benefit) - manual step, no Polar API access configured.
 
 **5a original spec (~2 evenings) - free repo + pro touchpoints**
 - Target the NEW mechanism: Power Automate Workflows webhook URLs + Adaptive Card payload
@@ -227,8 +227,8 @@ manual step, no LS API access configured. Fine to do even before store activatio
 
 **5e. Digests/batching (optional - only if users ask; cut by default)**
 
-Release train per phase: free repo tag minor → rebuild pro dist zip → upload to Lemon
-Squeezy release → README both repos → site feature grid + og copy if needed → announce.
+Release train per phase: free repo tag minor → rebuild pro dist zip → upload to the Polar
+product → README both repos → site feature grid + og copy if needed → announce.
 
 ## Decisions already made
 
@@ -243,12 +243,12 @@ Squeezy release → README both repos → site feature grid + og copy if needed 
   (Courier.com SaaS brand), filament-signals/relay (occupied/crowded).
 - **Packaging: two packages at release.** Free `stboris/filament-outbox` on Packagist (channels
   only, MIT, no Filament dependency - usable in any Laravel app). Pro package (Filament plugin,
-  requires free package + filament ^5) distributed privately via Lemon Squeezy license keys -
+  requires free package + filament ^5) distributed privately via Polar license keys -
   paid code can't live on public Packagist anyway. During development: single repo,
   filament/filament in require-dev; split happens in Phase 3. The code layout already matches
   the split line (Channels/Messages/Commands = free, future Filament/ = pro).
-- Distribution: Lemon Squeezy (not Gumroad) - handles VAT as merchant of record
-- Pricing: free single-channel tier, Pro $49–79 one-time (revisit subscription later)
+- Distribution: Polar (not Gumroad, not Lemon Squeezy) - handles VAT as merchant of record
+- Pricing: free single-channel tier, Pro $59 one-time (revisit subscription later)
 - Marketing channels: filamentphp.com/plugins directory, Filament Discord, Laravel News
 - Deliberately NOT building: WhatsApp (existing competitor plugin covers it), full SaaS
 
