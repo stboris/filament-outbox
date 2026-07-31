@@ -1,5 +1,5 @@
 # Excluded from distribution archives (git archive / composer dist zips).
-# Customers receive the package files only — internal docs and dev tooling
+# Customers receive the package files only - internal docs and dev tooling
 # stay in the private repo.
 /CLAUDE.md export-ignore
 /.gitattributes export-ignore

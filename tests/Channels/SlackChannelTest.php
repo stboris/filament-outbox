@@ -27,8 +27,8 @@ function slackNotification(mixed $message): Notification
 it('sends text and blocks to the routed webhook url', function () {
     Http::fake(['hooks.slack.test/*' => Http::response('ok')]);
 
-    $message = SlackMessage::make('Trade closed — +$42.00')
-        ->section('*LONG closed — BTCUSDT*')
+    $message = SlackMessage::make('Trade closed - +$42.00')
+        ->section('*LONG closed - BTCUSDT*')
         ->username('Notifier')
         ->iconEmoji(':bell:');
 
@@ -38,9 +38,9 @@ it('sends text and blocks to the routed webhook url', function () {
 
     Http::assertSent(function ($request) {
         return $request->url() === 'https://hooks.slack.test/services/T00/B00/xyz'
-            && $request['text'] === 'Trade closed — +$42.00'
+            && $request['text'] === 'Trade closed - +$42.00'
             && $request['blocks'][0]['type'] === 'section'
-            && $request['blocks'][0]['text']['text'] === '*LONG closed — BTCUSDT*'
+            && $request['blocks'][0]['text']['text'] === '*LONG closed - BTCUSDT*'
             && $request['username'] === 'Notifier'
             && $request['icon_emoji'] === ':bell:';
     });

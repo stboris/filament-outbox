@@ -31,7 +31,7 @@ it('sends a message to the webhook url routed by the notifiable', function () {
     $message = DiscordMessage::make('Trade opened')
         ->username('Notifier')
         ->embed(fn (DiscordEmbed $embed) => $embed
-            ->title('LONG opened — BTCUSDT')
+            ->title('LONG opened - BTCUSDT')
             ->color('#1BAF7A')
             ->field('Entry price', '$100.00'));
 
@@ -43,7 +43,7 @@ it('sends a message to the webhook url routed by the notifiable', function () {
         return $request->url() === 'https://discord.test/api/webhooks/123/abc'
             && $request['content'] === 'Trade opened'
             && $request['username'] === 'Notifier'
-            && $request['embeds'][0]['title'] === 'LONG opened — BTCUSDT'
+            && $request['embeds'][0]['title'] === 'LONG opened - BTCUSDT'
             && $request['embeds'][0]['color'] === 0x1BAF7A
             && $request['embeds'][0]['fields'][0] === ['name' => 'Entry price', 'value' => '$100.00', 'inline' => false];
     });

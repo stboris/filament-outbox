@@ -1,8 +1,8 @@
 # Filament Outbox
 
-Configurable notification channels for Laravel — **Discord**, **Slack**, **Microsoft Teams**, and **generic signed webhooks** — built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
+Configurable notification channels for Laravel - **Discord**, **Slack**, **Microsoft Teams**, and **generic signed webhooks** - built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
 
-Need an admin UI? [Filament Outbox Pro](#filament-outbox-pro) adds a Filament v5 panel on top: endpoint management, send history with retry, test-send buttons, and model-event triggers.
+Need an admin UI? **[Filament Outbox Pro](https://filamentoutbox.com)** adds a Filament v5 panel on top - endpoint management, send history with retry, test-send buttons and model-event triggers. $59 one-time, per project.
 
 ## Requirements
 
@@ -41,7 +41,7 @@ class TradeOpened extends Notification
         return DiscordMessage::make()
             ->username('Trading Bot')
             ->embed(fn (DiscordEmbed $embed) => $embed
-                ->title('LONG opened — BTCUSDT')
+                ->title('LONG opened - BTCUSDT')
                 ->color('#2A78D6')
                 ->fields([
                     'Entry price' => '$100.00',
@@ -72,14 +72,14 @@ public function via(object $notifiable): array
 
 public function toSlack(object $notifiable): SlackMessage
 {
-    return SlackMessage::make('Trade closed — +$42.00')
-        ->section('*LONG closed — BTCUSDT*');
+    return SlackMessage::make('Trade closed - +$42.00')
+        ->section('*LONG closed - BTCUSDT*');
 }
 ```
 
 ### Microsoft Teams (Workflows webhook)
 
-Sends [Adaptive Cards](https://adaptivecards.io) to the webhook URL of a Power Automate workflow (the *"When a Teams webhook request is received"* trigger) — the mechanism that replaces the retired Office 365 Connector webhooks.
+Sends [Adaptive Cards](https://adaptivecards.io) to the webhook URL of a Power Automate workflow (the *"When a Teams webhook request is received"* trigger) - the mechanism that replaces the retired Office 365 Connector webhooks.
 
 ```php
 use Stboris\FilamentOutbox\Messages\TeamsMessage;
@@ -139,23 +139,23 @@ php artisan outbox:test webhook --message="Custom check"
 
 ## Resilient sending
 
-Transient failures — connection errors, HTTP 429 rate limits, and 5xx responses — are automatically retried with exponential backoff (2 attempts by default, configurable via `http.retry` in the config). Permanent client errors (4xx) fail immediately with a descriptive `CouldNotSendNotification` exception.
+Transient failures - connection errors, HTTP 429 rate limits, and 5xx responses - are automatically retried with exponential backoff (2 attempts by default, configurable via `http.retry` in the config). Permanent client errors (4xx) fail immediately with a descriptive `CouldNotSendNotification` exception.
 
 ## Filament Outbox Pro
 
-The Pro package adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels.
+[Filament Outbox Pro](https://filamentoutbox.com) adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels. $59 one-time, per project, with a 14-day refund policy.
 
 <p>
   <img src="https://filamentoutbox.com/assets/demo/test-send.gif" alt="Test-send from the Filament panel" width="49%">
   <img src="https://filamentoutbox.com/assets/demo/discord-receive.gif" alt="The test notification arriving in Discord" width="49%">
 </p>
 
-- **Endpoint management** — named destinations managed in the panel instead of `.env` files: URL, per-environment scoping, enable toggle, channel defaults (bot username, extra headers, …), webhook signing secrets. Reference them from code with `->endpoint('team-alerts')` on any message.
-- **Send history** — every send attempt recorded with status, HTTP code, and payload preview; failed sends can be retried from the panel, with retries recorded as new, linked rows.
-- **Test-send** — a button on every endpoint to verify it end to end.
-- **Model-event triggers** — notify on `created`/`updated`/`deleted` for any model, with `{placeholder}` message templates and optional queued sending with retry/backoff. No notification class needed.
+- **Endpoint management** - named destinations managed in the panel instead of `.env` files: URL, per-environment scoping, enable toggle, channel defaults (bot username, extra headers, …), webhook signing secrets. Reference them from code with `->endpoint('team-alerts')` on any message.
+- **Send history** - every send attempt recorded with status, HTTP code, and payload preview; failed sends can be retried from the panel, with retries recorded as new, linked rows.
+- **Test-send** - a button on every endpoint to verify it end to end.
+- **Model-event triggers** - notify on `created`/`updated`/`deleted` for any model, with `{placeholder}` message templates and optional queued sending with retry/backoff. No notification class needed.
 
-Pro is a separate, commercial package that plugs into this one — nothing in your notification code changes when you add it.
+Pro is a separate, commercial package that plugs into this one - nothing in your notification code changes when you add it. **[Get Filament Outbox Pro →](https://filamentoutbox.com)**
 
 ## Testing
 

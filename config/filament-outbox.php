@@ -32,7 +32,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | URL from a Power Automate workflow using the "When a Teams webhook
-    | request is received" trigger — the replacement for the retired Office
+    | request is received" trigger - the replacement for the retired Office
     | 365 Connector webhooks. Messages are sent as Adaptive Cards.
     |
     */
@@ -115,7 +115,7 @@ return [
         //     'events' => ['created', 'updated', 'deleted'],
         //     'channels' => ['discord', 'webhook'],
         //     'endpoints' => ['discord' => 'team-alerts'],
-        //     'template' => 'Order #{id} was {event} — total {total}',
+        //     'template' => 'Order #{id} was {event} - total {total}',
         //     'queue' => false,
         // ],
     ],

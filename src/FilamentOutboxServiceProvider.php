@@ -30,7 +30,7 @@ class FilamentOutboxServiceProvider extends PackageServiceProvider
             $service->extend('webhook', fn ($app) => $app->make(WebhookChannel::class));
 
             // Only claim the 'slack' alias when the official
-            // laravel/slack-notification-channel package is absent — never
+            // laravel/slack-notification-channel package is absent - never
             // clobber an existing Slack setup. SlackChannel::class in via()
             // always works regardless.
             if (! class_exists(\Illuminate\Notifications\Slack\SlackChannel::class)

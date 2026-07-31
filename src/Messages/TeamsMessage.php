@@ -5,7 +5,7 @@ namespace Stboris\FilamentOutbox\Messages;
 use Stboris\FilamentOutbox\Messages\Concerns\RoutesToEndpoint;
 
 /**
- * A Microsoft Teams message for Power Automate Workflows webhooks — the
+ * A Microsoft Teams message for Power Automate Workflows webhooks - the
  * mechanism replacing the retired Office 365 Connector webhooks. The payload
  * is an Adaptive Card wrapped in a message attachment, which both Workflows
  * and legacy incoming webhooks accept.
@@ -98,7 +98,7 @@ class TeamsMessage
 
     /**
      * Replace the generated card entirely with a raw Adaptive Card payload
-     * (the card content only — the message/attachment envelope stays ours).
+     * (the card content only - the message/attachment envelope stays ours).
      */
     public function card(array $card): static
     {

@@ -112,7 +112,7 @@ trait SendsWebhookRequests
         string $method = 'post',
         ?string $rawBody = null,
     ): void {
-        // Anonymous class names embed a NUL byte and the file path — strip it.
+        // Anonymous class names embed a NUL byte and the file path - strip it.
         $notificationClass = strstr($notification::class, "\0", true) ?: $notification::class;
 
         $recorder = app()->bound(HistoryRecorder::class) ? app(HistoryRecorder::class) : null;

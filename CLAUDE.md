@@ -1,4 +1,4 @@
-# Project: Filament Notification Channel Plugin — "Filament Outbox" (`stboris/filament-outbox`)
+# Project: Filament Notification Channel Plugin - "Filament Outbox" (`stboris/filament-outbox`)
 
 ## Context / handoff
 
@@ -16,7 +16,7 @@ A Laravel package + Filament v5 plugin: configurable notification channels
 (Discord, Slack, generic webhook) with a Filament admin UI on top.
 
 Key differentiator vs. free `laravel-notification-channels` packages: the **Filament admin
-layer** — endpoint management UI, send history with retry, test-send button, per-model-event
+layer** - endpoint management UI, send history with retry, test-send button, per-model-event
 triggers. Free packages only give you the raw sending channel; we sell the management UX.
 
 ## Package identity & conventions
@@ -31,10 +31,10 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 
 ### Free tier (discovery funnel)
 - Single channel: Discord webhook notification channel class
-- No admin UI — just the Laravel Notification channel
+- No admin UI - just the Laravel Notification channel
 - Published on Packagist + listed free on filamentphp.com/plugins
 
-### Pro tier ($49–79 one-time, sold via Lemon Squeezy — merchant of record, handles EU/CH VAT)
+### Pro tier ($49–79 one-time, sold via Lemon Squeezy - merchant of record, handles EU/CH VAT)
 - Slack channel + generic webhook channel
 - Filament resource: manage endpoints (CRUD, per-environment config)
 - Send history table widget with status, payload preview, retry action
@@ -55,7 +55,7 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
   payload preview, retry). 87 Pest tests green incl. Livewire resource tests.
 - **Phase 3 split done (2026-07-11):** channels decoupled via container-bound contracts
   (`Contracts\{EndpointResolver,Endpoint,HistoryRecorder,HistoryRecord}`, bound by the pro
-  provider; channels degrade gracefully unbound — no history, descriptive exception for
+  provider; channels degrade gracefully unbound - no history, descriptive exception for
   `->endpoint()`). Pro code physically moved to sibling repo
   `~/PhpStormProjects/filament-outbox-pro` (`stboris/filament-outbox-pro`, license
   proprietary, same `Stboris\FilamentOutbox` namespace root, path-repo dev dependency on
@@ -65,7 +65,7 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
   Pro repo: Models/Enums/Support/Jobs/Triggers/Filament + migrations, 36 tests. READMEs
   rewritten for both.
 - Test harness (pro repo): testbench + RefreshDatabase; Filament tests need the blade-icons
-  providers and `#[WithMigration]` (users table) — see tests/TestCase.php +
+  providers and `#[WithMigration]` (users table) - see tests/TestCase.php +
   tests/FilamentTestCase.php in filament-outbox-pro. Free repo tests run without a database.
 
 ## Build phases
@@ -78,11 +78,11 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
 3. **Phase 3 (2–3 evenings):** README + docs site page, demo video/GIFs, Lemon Squeezy
    product + license key delivery
 4. **Phase 4 (2–3 evenings): Product landing page.** Professional marketing site for the
-   plugin — must NOT look AI-generated; benchmark against landing pages of best-selling
+   plugin - must NOT look AI-generated; benchmark against landing pages of best-selling
    Filament plugin authors (e.g. Ralph J. Smit's plugin pages at ralphjsmit.com, Kenneth
-   Sese's Advanced Tables, filamentphp.com featured paid plugins — research current best
+   Sese's Advanced Tables, filamentphp.com featured paid plugins - research current best
    examples at design time). Tech stack: **static HTML + Tailwind CSS** (standalone Tailwind
-   CLI, no Laravel/Filament, no JS framework) — Lemon Squeezy checkout is a hosted
+   CLI, no Laravel/Filament, no JS framework) - Lemon Squeezy checkout is a hosted
    link/overlay so no backend is needed, and a static site deploys anywhere (cyon shared
    hosting or any static host) with zero maintenance. Content: dark-mode hero with real
    admin-UI screenshot, feature grid, short code snippet (`->endpoint('name')` DX), demo
@@ -91,7 +91,7 @@ triggers. Free packages only give you the raw sending channel; we sell the manag
    deploy → then submit the filamentphp.com/plugins listing (moved here from Phase 3, since
    the listing links to this page as the purchase URL).
 
-## Merchant of record: switched Lemon Squeezy → Polar — DONE (2026-07-21)
+## Merchant of record: switched Lemon Squeezy → Polar - DONE (2026-07-21)
 
 Polar account approved same day as signup: identity verified (Stripe Identity, passport +
 selfie), payout account connected, product ("Filament Outbox Pro", $59, License Keys +
@@ -109,35 +109,35 @@ there). Detailed rationale for the switch below, kept for reference.
 Lemon Squeezy store activation, requested 2026-07-14, sat unactivated with zero support
 response for 6+ days. Research before switching: Trustpilot/Product Hunt/Reddit show a
 consistent, high-volume pattern of opaque "risk" account holds and multi-week support
-silence — not isolated complaints (one aggregator rates support-unresponsiveness 8/10 and
+silence - not isolated complaints (one aggregator rates support-unresponsiveness 8/10 and
 unexplained-suspension 10/10 severity across dozens of sources). Structural cause found:
 Stripe (which acquired Lemon Squeezy in 2024) launched its own native MoR product,
 **Stripe Managed Payments**, in public preview Feb 2026, and Lemon Squeezy's own blog now
-frames itself as a migration path *into* that product — strong signal LS is being wound
+frames itself as a migration path *into* that product - strong signal LS is being wound
 down, plausibly explaining the stalled, unanswered activation.
 
 Stripe Managed Payments itself was ruled out: it has **no native license-key or file-
-delivery support** — would need a bolted-on third-party service (Keyforge/CheckoutKeys),
+delivery support** - would need a bolted-on third-party service (Keyforge/CheckoutKeys),
 adding a dependency against this project's "minimal dependencies" constraint.
 
 **Decision: move to [Polar.sh](https://polar.sh).** Still a genuine merchant of record
-(handles VAT/tax — the same requirement that ruled out Anystack/Privato originally), has
+(handles VAT/tax - the same requirement that ruled out Anystack/Privato originally), has
 native License Keys + File Downloads benefits matching the current LS setup feature-for-
 feature, and currently has a materially better
 support/trust reputation than LS post-acquisition. Fee turned out to be the same 5% +
 $0.50 as Lemon Squeezy on Polar's free plan (the 4% + $0.40 figure from initial research
-is a discounted paid-plan rate) — didn't change the decision, switch was about reliability
+is a discounted paid-plan rate) - didn't change the decision, switch was about reliability
 not price. KYC is individual-friendly: passport/ID + selfie via Stripe Identity, no
 company entity needed (this was Boris's blocker for a Microsoft 365 tenant test account,
-but is not one here) — and in practice the account was reviewed and approved same-day.
+but is not one here) - and in practice the account was reviewed and approved same-day.
 
 **Switching cost right now: zero.** No live sales, no issued license keys, no order
-history on Lemon Squeezy — this is the cheapest point to switch. Lemon Squeezy store can
+history on Lemon Squeezy - this is the cheapest point to switch. Lemon Squeezy store can
 simply be abandoned (deactivate later; no urgency, nothing to migrate).
 
-**Setup steps — all done 2026-07-21**, see status note at the top of this section.
+**Setup steps - all done 2026-07-21**, see status note at the top of this section.
 Remaining housekeeping (low priority, no urgency): deactivate the Lemon Squeezy
-store/product now that Polar is live — nothing to migrate, zero real sales ever occurred
+store/product now that Polar is live - nothing to migrate, zero real sales ever occurred
 there.
 
 ## Immediate next steps (start here)
@@ -148,7 +148,7 @@ page built** in `~/PhpStormProjects/filament-outbox-site` (private repo
 `stboris/filament-outbox-site`, static HTML + Tailwind v4, privacy/impressum pages with
 cookieless-Matomo wording, deploy.sh for cyon). **Domain bought: filamentoutbox.com**
 (2026-07-13). Distribution decision re-confirmed: Lemon Squeezy MoR (Anystack/Privato
-rejected — not merchants of record, own-Stripe VAT burden).
+rejected - not merchants of record, own-Stripe VAT burden).
 
 **LAUNCHED (2026-07-14):** Packagist live; demo GIFs recorded (docs/demo in pro repo,
 asset map in docs/LAUNCH.md); Lemon Squeezy store + product live ($59 USD, license keys
@@ -157,43 +157,43 @@ site deployed with real checkout URL + Matomo + demo videos.
 
 filamentphp.com listing: **APPROVED and live (2026-07-16)** after one image rework.
 
-Lemon Squeezy store: **awaiting LS activation** — checkout still opens in test mode, so
+Lemon Squeezy store: **awaiting LS activation** - checkout still opens in test mode, so
 the site's Buy button is temporarily disabled (2026-07-16): disabled-look button +
 notify-me mailto (info@filamentoutbox.com), original link kept in `TEMP(store-approval)`
 comment markers in filament-outbox-site/index.html. To reinstate when LS approves:
 delete the temp block, uncomment the original, `./deploy.sh`.
 
 Remaining (Boris):
-1. When Lemon Squeezy activates the store — reinstate the Buy button (see above) and
+1. When Lemon Squeezy activates the store - reinstate the Buy button (see above) and
    email anyone who wrote to info@filamentoutbox.com asking to be notified
 2. Announce: Filament Discord #plugins, Laravel News links form
 3. Regenerate the Discord webhook used for demo recording (URL was shared in chat)
 
-## Phase 5 — Outbox v1.1/v1.2 roadmap (planned 2026-07-19)
+## Phase 5 - Outbox v1.1/v1.2 roadmap (planned 2026-07-19)
 
 Decision: extend Outbox instead of starting a second product (no sales data yet; existing
 funnel is live; marginal cost low). Market research 2026-07-19: ~79 paid of 921 directory
 plugins; Outbox is still the only paid outbound-delivery plugin (Ralph J. Smit's
-Notifications Pro is in-app/database only — no overlap). Second-product candidate parked:
+Notifications Pro is in-app/database only - no overlap). Second-product candidate parked:
 unified ops suite (schedule+queue monitoring w/ alert rules, synergy with Outbox channels).
 
-**5a. Teams channel — SHIPPED (2026-07-20).** Free v1.1.0 tagged + pushed, live on
+**5a. Teams channel - SHIPPED (2026-07-20).** Free v1.1.0 tagged + pushed, live on
 Packagist within seconds via the GitHub webhook. Pro v1.1.0 tagged + pushed; dist zip
 built at filament-outbox-pro/filament-outbox-pro-v1.1.0.zip (Teams code confirmed present
 inside). Validated without a Teams business tenant (Boris didn't have one and didn't want
 to fake a company signup): Adaptive Cards Designer (adaptivecards.io/designer, schema-valid
 render) + webhook.site wire-level capture (byte-exact JSON, emoji/encoding intact). Real
-Microsoft Workflows acceptance still unconfirmed — low risk, it's their documented schema.
+Microsoft Workflows acceptance still unconfirmed - low risk, it's their documented schema.
 
 **Remaining for this release (Boris):** upload `filament-outbox-pro-v1.1.0.zip` to the
-Lemon Squeezy product as a new file version (Products → Filament Outbox Pro → Files) —
+Lemon Squeezy product as a new file version (Products → Filament Outbox Pro → Files) -
 manual step, no LS API access configured. Fine to do even before store activation.
 
-**5a original spec (~2 evenings) — free repo + pro touchpoints**
+**5a original spec (~2 evenings) - free repo + pro touchpoints**
 - Target the NEW mechanism: Power Automate Workflows webhook URLs + Adaptive Card payload
   (`{"type":"message","attachments":[{"contentType":"application/vnd.microsoft.card.adaptive",
   "content":{AdaptiveCard 1.4}}]}`). Classic Office 365 Connector webhooks retire
-  2026-05-18..22 — old `outlook.office.com/webhook/` URLs die. MessageCard is deprecated
+  2026-05-18..22 - old `outlook.office.com/webhook/` URLs die. MessageCard is deprecated
   (Workflows accepts it, but buttons don't render). Marketing angle: the free
   laravel-notification-channels/microsoft-teams package is MessageCard-era; we're
   Workflows-native.
@@ -201,21 +201,21 @@ manual step, no LS API access configured. Fine to do even before store activatio
   `Channels/TeamsChannel` (mirror SlackChannel: `toTeams()`, string coercion,
   resolveDestination with `filament-outbox.teams.webhook_url`, endpoint setting defaults),
   config `teams.webhook_url` (OUTBOX_TEAMS_WEBHOOK_URL), provider alias `teams`,
-  `outbox:test` + OutboxTestNotification support. Workflows replies 202/empty — any 2xx is
+  `outbox:test` + OutboxTestNotification support. Workflows replies 202/empty - any 2xx is
   success; existing 429/5xx retry applies. Pest tests w/ Http::fake (card shape, routing,
   invalid-message exceptions).
 - Pro repo: add `teams` to OutboxEndpointForm channel Select (+ visible() settings if any),
-  test-send + triggers accept it (channel column is a plain string — no migration),
+  test-send + triggers accept it (channel column is a plain string - no migration),
   Resender needs nothing (re-signing is webhook-only). Livewire tests.
 
 **5b. Telegram channel (~2 evenings)**
 - Bot API `POST https://api.telegram.org/bot{token}/sendMessage` with chat_id/text/
-  parse_mode (HTML to start; MarkdownV2 escaping is a minefield — punt). No buttons in v1.
-- CAUTION: the bot token is IN the URL — history recording and exceptions must store a
+  parse_mode (HTML to start; MarkdownV2 escaping is a minefield - punt). No buttons in v1.
+- CAUTION: the bot token is IN the URL - history recording and exceptions must store a
   redacted URL (`bot***:***/sendMessage`). Pro form: token as password input, chat_id field.
 - Config `telegram.{bot_token,chat_id}`; endpoint settings override both.
 
-**5c. Alert hygiene: throttle/dedup (~2–3 evenings, pro — needs DB)**
+**5c. Alert hygiene: throttle/dedup (~2–3 evenings, pro - needs DB)**
 - `->dedupKey('deploy-failed')` on messages + per-trigger `throttle` config (max 1 send
   per key per N minutes). Implement via outbox_messages lookup (cache fallback);
   suppressed sends recorded with new MessageStatus::Suppressed so the history shows them.
@@ -225,7 +225,7 @@ manual step, no LS API access configured. Fine to do even before store activatio
 - Success-rate widget per endpoint (24h/7d from outbox_messages), consecutive-failure
   alarm: "when endpoint X fails N times in a row, notify via endpoint Y".
 
-**5e. Digests/batching (optional — only if users ask; cut by default)**
+**5e. Digests/batching (optional - only if users ask; cut by default)**
 
 Release train per phase: free repo tag minor → rebuild pro dist zip → upload to Lemon
 Squeezy release → README both repos → site feature grid + og copy if needed → announce.
@@ -234,7 +234,7 @@ Squeezy release → README both repos → site feature grid + og copy if needed 
 
 - **Name: "Filament Outbox"** (`stboris/filament-outbox`, namespace `Stboris\FilamentOutbox`).
   Chosen 2026-07-11 after research: "filament-notifier" collides with
-  `usamamuneerchaudhary/filament-notifier` on Packagist — an actively maintained free (MIT)
+  `usamamuneerchaudhary/filament-notifier` on Packagist - an actively maintained free (MIT)
   competitor (Filament 4/5, Laravel 11–13) with templates, scheduling, analytics, preferences
   API. Its weakness: single global endpoint per channel type, own parallel notification system
   (not Laravel-native), shallow drivers with swallowed errors. Our differentiators: native
@@ -242,12 +242,12 @@ Squeezy release → README both repos → site feature grid + og copy if needed 
   "filament-outbox" had zero collisions on Packagist and GitHub. Rejected: filament-courier
   (Courier.com SaaS brand), filament-signals/relay (occupied/crowded).
 - **Packaging: two packages at release.** Free `stboris/filament-outbox` on Packagist (channels
-  only, MIT, no Filament dependency — usable in any Laravel app). Pro package (Filament plugin,
-  requires free package + filament ^5) distributed privately via Lemon Squeezy license keys —
+  only, MIT, no Filament dependency - usable in any Laravel app). Pro package (Filament plugin,
+  requires free package + filament ^5) distributed privately via Lemon Squeezy license keys -
   paid code can't live on public Packagist anyway. During development: single repo,
   filament/filament in require-dev; split happens in Phase 3. The code layout already matches
   the split line (Channels/Messages/Commands = free, future Filament/ = pro).
-- Distribution: Lemon Squeezy (not Gumroad) — handles VAT as merchant of record
+- Distribution: Lemon Squeezy (not Gumroad) - handles VAT as merchant of record
 - Pricing: free single-channel tier, Pro $49–79 one-time (revisit subscription later)
 - Marketing channels: filamentphp.com/plugins directory, Filament Discord, Laravel News
 - Deliberately NOT building: WhatsApp (existing competitor plugin covers it), full SaaS

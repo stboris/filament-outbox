@@ -44,7 +44,7 @@ class TeamsChannel
             return;
         }
 
-        // Workflows posts as the flow itself — there are no sender overrides
+        // Workflows posts as the flow itself - there are no sender overrides
         // like Slack's username/icon, so endpoint settings add nothing here.
         $this->deliver('teams', $url, $message->toArray(), $notification, $endpoint);
     }
