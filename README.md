@@ -2,7 +2,7 @@
 
 Configurable notification channels for Laravel - **Discord**, **Slack**, **Microsoft Teams**, and **generic signed webhooks** - built on Laravel's native notification system. No new APIs to learn: write a normal `Notification` class, return a message object, done.
 
-Need an admin UI? **[Filament Outbox Pro](https://filamentoutbox.com)** adds a Filament v5 panel on top - endpoint management, send history with retry, test-send buttons and model-event triggers. $59 one-time, per project.
+Need an admin UI? [Filament Outbox Pro](#filament-outbox-pro) adds a Filament v5 panel on top: endpoint management, send history with retry, test-send buttons, and model-event triggers.
 
 ## Requirements
 
@@ -143,7 +143,7 @@ Transient failures - connection errors, HTTP 429 rate limits, and 5xx responses 
 
 ## Filament Outbox Pro
 
-[Filament Outbox Pro](https://filamentoutbox.com) adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels. $59 one-time, per project, with a 14-day refund policy.
+The Pro package adds a [Filament v5](https://filamentphp.com) admin layer on top of these channels.
 
 <p>
   <img src="https://filamentoutbox.com/assets/demo/test-send.gif" alt="Test-send from the Filament panel" width="49%">
@@ -155,7 +155,7 @@ Transient failures - connection errors, HTTP 429 rate limits, and 5xx responses 
 - **Test-send** - a button on every endpoint to verify it end to end.
 - **Model-event triggers** - notify on `created`/`updated`/`deleted` for any model, with `{placeholder}` message templates and optional queued sending with retry/backoff. No notification class needed.
 
-Pro is a separate, commercial package that plugs into this one - nothing in your notification code changes when you add it. **[Get Filament Outbox Pro →](https://filamentoutbox.com)**
+Pro is a separate, commercial package that plugs into this one - nothing in your notification code changes when you add it.
 
 ## Testing
 
